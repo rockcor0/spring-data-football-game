@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rockcor.model.Player;
+import com.rockcor.model.Team;
 import com.rockcor.service.IPlayerService;
+import com.rockcor.service.ITeamService;
 
 /**
  * @author ricardodelgadocarreno
@@ -18,10 +20,13 @@ import com.rockcor.service.IPlayerService;
  *
  */
 @Controller
-public class PlayerController<T> {
+public class GameController<T> {
 	
 	@Autowired
 	private IPlayerService<T> _playerService;
+	
+	@Autowired
+	private ITeamService<T> _teamService;
 
 	@GetMapping("/hello")
 	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
@@ -39,12 +44,13 @@ public class PlayerController<T> {
 	@GetMapping("/list")
 	public String getPlayers(Model model) {
 		
+		Team team = new Team("My Family");
 		
-		_playerService.save(new Player(1,"Ricardo Delgado", 10, "Delantero", 10, 10, 10));
-		_playerService.save(new Player(2,"Lilly Duque", 8, "Armadora", 10, 10, 10));
-		_playerService.save(new Player(3,"Gandalf", 2, "Defensa Central", 10, 10, 10));
-		_playerService.save(new Player(4,"Arya", 1, "Arquera", 10, 10, 10));
-
+		_teamService.save((T) team);
+		_playerService.save((T) new Player("Ricardo Delgado", 10, "Delantero", 10, 10, 10, team));
+		_playerService.save((T) new Player("Lilly Duque", 8, "Armadora", 10, 10, 10, team));
+		_playerService.save((T) new Player("Gandalf", 2, "Defensa Central", 10, 10, 10, team));
+		_playerService.save((T) new Player("Arya", 1, "Arquera", 10, 10, 10, team));
 
 		model.addAttribute("players", _playerService.findAll());
 		

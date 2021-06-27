@@ -5,7 +5,12 @@ package com.rockcor.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * @author ricardodelgadocarreno
@@ -15,9 +20,10 @@ import javax.persistence.Id;
 public class Player {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPersona;
 	
-	@Column(name="nombre", length=50)
+	@Column(name="name", length=50)
 	private String name;
 	
 	@Column(name="number", length=2)
@@ -34,6 +40,10 @@ public class Player {
 	
 	@Column(name="dodge", length=2)
 	private int dodge;
+	
+	@ManyToOne
+		@JoinColumn(name="idTeam")
+	private Team team;
 	
 
 	/**
@@ -61,6 +71,60 @@ public class Player {
 		this.kick = kick;
 		this.pass = pass;
 		this.dodge = dodge;
+	}
+	
+	/**
+	 * @param idPersona
+	 * @param name
+	 * @param number
+	 * @param position
+	 * @param kick
+	 * @param pass
+	 * @param dodge
+	 */
+	public Player(String name, int number, String position, int kick, int pass, int dodge) {
+		super();
+		this.name = name;
+		this.number = number;
+		this.position = position;
+		this.kick = kick;
+		this.pass = pass;
+		this.dodge = dodge;
+	}
+	
+
+	/**
+	 * @param name
+	 * @param number
+	 * @param position
+	 * @param kick
+	 * @param pass
+	 * @param dodge
+	 * @param team
+	 */
+	public Player(String name, int number, String position, int kick, int pass, int dodge, Team team) {
+		super();
+		this.name = name;
+		this.number = number;
+		this.position = position;
+		this.kick = kick;
+		this.pass = pass;
+		this.dodge = dodge;
+		this.team = team;
+	}
+
+	/**
+	 * @return the team
+	 */
+	public Team getTeam() {
+		return team;
+	}
+
+	/**
+	 * @param team the team to set
+	 */
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	/**

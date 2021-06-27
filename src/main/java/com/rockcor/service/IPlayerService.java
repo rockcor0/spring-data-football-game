@@ -17,7 +17,7 @@ public interface IPlayerService<T> {
 	T createPlayer();
 	public T save();
 	List<T> findAll();
-	void save(Player player);
+	void save(T t);
 	
 	
 }

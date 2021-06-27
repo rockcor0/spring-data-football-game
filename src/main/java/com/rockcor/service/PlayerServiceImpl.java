@@ -23,7 +23,7 @@ public class PlayerServiceImpl implements IPlayerService<Player>{
 
 	@Override
 	public Player createPlayer() {
-		return new Player(1, "Ricardo Delgado", 10, "Delantero", 10, 10, 10);
+		return new Player("Ricardo Delgado", 10, "Delantero", 10, 10, 10);
 	}
 
 	@Override
