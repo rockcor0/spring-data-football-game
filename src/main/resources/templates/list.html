@@ -6,7 +6,15 @@
 </head>
 <body>
     
-    <table>
+    <table border="1">
+    	<th:block>
+    		<tr>
+    			<td th:text="ID">...</td>
+    			<td th:text="Nombre">...</td>
+    			<td th:text="Camiseta">...</td>
+    			<td th:text="Posición">...</td>
+    		</tr>
+    	</th:block>
     	<th:block th:each="player : ${players}">
     		<tr>
     			<td th:text="${player.idPersona}">...</td>
