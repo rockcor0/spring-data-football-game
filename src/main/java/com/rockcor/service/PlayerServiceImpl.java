@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rockcor.model.Player;
+import com.rockcor.model.Team;
 import com.rockcor.repository.IPlayerRepository;
 
 /**
@@ -42,6 +43,11 @@ public class PlayerServiceImpl implements IPlayerService<Player>{
 	@Override
 	public void save(Player player) {
 		_playerRepository.save(player);
+	}
+
+	@Override
+	public List<Player> findByTeam(Team team) {
+		return _playerRepository.findByTeam(team);
 	}
 	
 	
